@@ -1,3 +1,2 @@
-*.gff3
-*.gff
+*.gff*
 node_modules

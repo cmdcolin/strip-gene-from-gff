@@ -15,11 +15,13 @@ fs.createReadStream(process.argv[2])
     } else if (data.sequence) {
       // console.log('got a sequence from a FASTA section')
     } else {
-      console.log(data[0].type)
       if (data[0].type === 'gene') {
-        data[0].child_features.forEach(f => console.log(gff.formatSync(f)))
+        data[0].child_features.forEach(f => {
+          delete f[0].attributes.Parent
+          process.stdout.write(gff.formatSync(f))
+        })
       } else {
-        console.log(gff.formatSync(data))
+        process.stdout.write(gff.formatSync(data))
       }
     }
   })
